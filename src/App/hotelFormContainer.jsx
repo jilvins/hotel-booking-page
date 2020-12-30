@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-
+import "./index.css"
 
 
 function Form () {
@@ -10,7 +10,8 @@ function Form () {
                 gender: "",
                 roomSize: "",
                 breakfast: false,
-                tvChannel: false
+                tvChannel: false,
+                costs: 0
         }
     )
 
@@ -27,14 +28,45 @@ function handleChange(event) {
 
 function handleSubmit(event) {
     event.preventDefault()
-    setFormData(prevData => [...prevData, formState])
-    //{console.log(createdForm)}
+    setFormData(prevData => [...prevData, formState])     
 }
 
-const createdForm = formData.map(contacts => <h2 key={contacts.firstName + contacts.lastName}> Submited information: <br/>
-    Name: {contacts.firstName} {contacts.lastName} <br/> Gender: {contacts.gender} <br/> Room size: {contacts.roomSize} <br/>
-    {contacts.breakfast ? "Breakfast included" : ""} <br/>
-    {contacts.tvChannel ? "Television set included" : ""} </h2>)
+let totalCost = formState.costs
+
+if (formState.roomSize === "small") {
+    totalCost = totalCost + 10
+} else if (formState.roomSize === "medium") {
+    totalCost = totalCost + 15
+ } else totalCost = totalCost + 20
+
+if(formState.breakfast === true) {
+    totalCost = totalCost +2
+}
+
+if(formState.tvChannel === true) {
+    totalCost = totalCost +4
+}
+
+const createdForm = formData.map(contacts => 
+<div className="received-container" key={contacts.firstName + contacts.lastName}> 
+<h2>Submited information: </h2>
+  <p>Name: {contacts.firstName} {contacts.lastName}</p>
+  <p>Gender: {contacts.gender}</p>
+  <p>Room size: {contacts.roomSize}</p> 
+  <p>{contacts.breakfast ? "Breakfast included" : ""} {contacts.tvChannel ? "Television set included" : ""} </p>
+  <p>first cost {totalCost}</p>
+  <h3>Total cost for the room is: <span className="money">   {(contacts.gender === "male")? totalCost : "It is free"}
+  {(contacts.gender === "male")? "$" : ":D"} </span> </h3>     
+     </div>
+     
+     
+     
+     
+     
+     
+     )
+
+
 
 
     return (

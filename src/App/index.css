@@ -1,6 +1,7 @@
 body {
     text-align: center;
-    background-color: lightgrey;
+    background-image: url("/src/images/bedroom-1285156_1920.jpg");
+    background-size: cover;
 }
 .main-container {
     text-align: center;
@@ -11,4 +12,13 @@ body {
 
 h1 {
     size: 56px;
+}
+
+.money {
+    color: green;
+}
+
+.received-container {
+    background-color: lightslategray;
+    padding: 1em;
 }
